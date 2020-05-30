@@ -1,0 +1,25 @@
+<p> <a href = "{% url 'graphyapp:create_image' %}"> Create image story</a>		<a href = "{% url 'graphyapp:create_video' %}"> Create video story</a> </p>
+<br>
+{% if stories %}
+    <ol>
+	    {% for story in stories %}
+	    <li>
+		    <ul>
+		        <li>{{ story.story_name }}</li>
+		        {% if story.get_cname == "ImageStory" %}
+		        	<img src="{{ story.story_image.url }}" width="400" height="400"></img>
+		        {% else %}
+		        	<video width='400' controls><source src="{{ story.story_video.url }}" type="video/mp4"></video>
+		        {% endif %}
+		        <p> {{ story.story_description }}
+		        <li>{{ story.created_time }}</li>
+		        <br><br>
+		    </ul>
+	    </li>
+	    {% endfor %}
+		
+    </ol>
+
+{% else %}
+    <p>No stories created yet.</p>
+{% endif %}
