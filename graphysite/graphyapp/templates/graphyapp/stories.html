@@ -1,25 +1,31 @@
-<p> <a href = "{% url 'graphyapp:create_image' %}"> Create image story</a>		<a href = "{% url 'graphyapp:create_video' %}"> Create video story</a> </p>
-<br>
-{% if stories %}
-    <ol>
-	    {% for story in stories %}
-	    <li>
-		    <ul>
-		        <li>{{ story.story_name }}</li>
-		        {% if story.get_cname == "ImageStory" %}
-		        	<img src="{{ story.story_image.url }}" width="400" height="400"></img>
-		        {% else %}
-		        	<video width='400' controls><source src="{{ story.story_video.url }}" type="video/mp4"></video>
-		        {% endif %}
-		        <p> {{ story.story_description }}
-		        <li>{{ story.created_time }}</li>
-		        <br><br>
-		    </ul>
-	    </li>
-	    {% endfor %}
-		
-    </ol>
+{% extends 'graphyapp/base.html' %}
 
-{% else %}
-    <p>No stories created yet.</p>
-{% endif %}
+{% block content %}
+	{% if stories %}
+	    <ol>
+		    {% for story in stories %}
+		    <div class='container'>
+		    	<li>
+				    <ul>
+				        <li><h5>{{ story.story_name }}</h5></li>
+				        {% if story.get_cname == "ImageStory" %}
+				        	<img src="{{ story.story_image.url }}" width="400" height="400"></img>
+				        {% else %}
+				        	<video width='400' controls><source src="{{ story.story_video.url }}" type="video/mp4"></video>
+				        {% endif %}
+				        <p style="width: 500px;"> {{ story.story_description }} </p>
+				        <p align='center'> -{{ story.grapher_name }} </p>
+				        <li>{{ story.created_time }}</li>
+				        <br><br>
+				    </ul>
+		    	</li>
+		    </div>
+		    {% endfor %}
+			
+	    </ol>
+
+	{% else %}
+	    <p>No stories created yet.</p>
+	{% endif %}
+
+{% endblock %}

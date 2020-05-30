@@ -1,10 +1,12 @@
 from itertools import chain
+import threading
 
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import ImageStory, VideoStory
 from .forms import ImageStoryForm, VideoStoryForm
+from .utils import resize_image
 # Create your views here.
 
 def index(request):
@@ -24,7 +26,10 @@ def create_image_story(request):
 
 	if request.method=="POST":
 		if form.is_valid():
-			form.save()
+			image_story = form.save(commit=False)
+			# t = threading.Thread(target=resize_image, args=[image_story])
+			# t.setDaemon(True)
+			# t.start()
 			return HttpResponseRedirect(reverse('graphyapp:stories'))
 
 	context = {}
