@@ -25,7 +25,7 @@ SECRET_KEY = '-_&!i*eb*9r*2gd*ocf(k*&(j&d#$s_bh&ou(=yxc6@7oupkv)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['yashgraphy.pythonanywhere.com']
+ALLOWED_HOSTS = ['localhost', 'yashgraphy.pythonanywhere.com']
 
 
 # Application definition
