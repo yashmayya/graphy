@@ -26,7 +26,7 @@ def create_image_story(request):
 
 	if request.method=="POST":
 		if form.is_valid():
-			image_story = form.save(commit=False)
+			image_story = form.save()
 			# t = threading.Thread(target=resize_image, args=[image_story])
 			# t.setDaemon(True)
 			# t.start()
